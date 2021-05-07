@@ -1,5 +1,5 @@
 import java.util.HashMap;
-/* Creates all items found in the game. To do: add spawn probs */
+/* Creates all items in the game. To do: add spawn probs */
 public class ItemFactory{
   public HashMap<String,Item> items;
   
