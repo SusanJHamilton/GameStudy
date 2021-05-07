@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<drjava version="drjava-20190813-220051">
+  <project autorefresh="false" main="ItemFactory" root="" work="">
+    <createjar file=""/>
+    <source>
+      <file active="true" name="ItemFactory.java" package="" timestamp="07-May-2021 12:23:32">
+        <select from="921" to="921"/>
+        <scroll column="73" row="0"/>
+      </file>
+      <file name="Inventory.java" package="" timestamp="07-May-2021 09:21:39">
+        <select from="921" to="921"/>
+        <scroll column="73" row="0"/>
+      </file>
+      <file name="Item.java" package="" timestamp="06-May-2021 18:05:48">
+        <select from="921" to="921"/>
+        <scroll column="73" row="0"/>
+      </file>
+    </source>
+    <included/>
+    <excluded/>
+    <collapsed>
+      <path name="./[ External Files ]/"/>
+    </collapsed>
+    <classpath/>
+    <breakpoints/>
+    <watches/>
+    <bookmarks/>
+    <preferences/>
+  </project>
+</drjava>
