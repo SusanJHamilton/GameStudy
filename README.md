@@ -1,12 +1,13 @@
 # GameStudyNouns
-1. item
+1. item 
+    Has name, price, description
 2. Character
 3. area
 4. inventory
-5. item interaction 
-6. something that creates items
-
-Verb 
+    a collection of items  
+5.  item factory - creates items, mediates item interactions which create new items 
+  
+Verb
   char moves from area
   chars interact with each other
   items spawn
@@ -21,6 +22,6 @@ items
     name
     description
     price
-    shelf life
-    prob of spawning
+    * optional shelf life
+    * prob of spawning factored into item factory, need to work into areas
 

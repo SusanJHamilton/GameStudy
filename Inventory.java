@@ -1,5 +1,5 @@
 /**
- * Auto Generated Java Class.
+ * Any bag of items.
  */
 public class Inventory {
   
