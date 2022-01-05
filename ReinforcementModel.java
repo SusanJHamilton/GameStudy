@@ -5,8 +5,11 @@
  * stateActionValues --  value of each action that might be taken in state
  * 
  */
+import java.io.*; 
 import java.util.*;
+
 public class ReinforcementModel {
+   
   /* <State, < Action, Value > >*/
   public HashMap<String,HashMap<String, Double>> stateActionValues = new HashMap<String,HashMap<String, Double>>();
   public HashMap<String,Double> stateValues = new HashMap<String,Double>();
@@ -118,21 +121,35 @@ public class ReinforcementModel {
     evaluateState(ctrl.getState(),ctrl);
     return ctrl.getMoveNum();
   }
-  public void sweep(int nTests)
+  public void sweep(int nTests) 
   {
+    PrintWriter out = null;
+    try{
+      out=new PrintWriter(new BufferedWriter(new FileWriter("ReinforcementResults.csv")));
+    }catch(Exception e){
+      e.printStackTrace();
+    } 
+    out.println("NRuns,Lifetime");
+    for(int nRuns=0; nRuns<2; nRuns++)
+    {
+      stateActionValues = new HashMap<String,HashMap<String, Double>>();
+      stateValues = new HashMap<String,Double>();
     int totalGames=1;
     // iterating once first so that the total games ends up a nice power of 2
     iterate(false);
-    for(int nGames = 1; nGames <= 4500000; nGames = nGames*2)
+    for(int nGames = 1; nGames <= 1000000; nGames = nGames*2)
     { double totalmoves=0.0;
       for(int i=0;i<nGames;i++)
       {
         totalmoves+=iterate(false);
       }
       totalGames+=nGames;
-      double avgmoves=totalmoves/nGames;      
+      double avgmoves=totalmoves/nGames;  
+      out.println(totalGames + "," +average(nTests));    
       System.out.println("Games Played = " + totalGames + " Average = " +average(nTests)+" Average state value "+averageStateValues()+" Random move average = "+avgmoves);
     }
+    }
+    out.close();
   }
   public double average(int nTests)
   {
@@ -159,6 +176,7 @@ public class ReinforcementModel {
       Scanner input = new Scanner(System.in);
     Integer nGames =  input.nextInt();
     Integer n =  input.nextInt();
+    input.close();
     for(int i=0;i<nGames;i++)
     {
       if (i%10000==0){System.out.print(" "+i);}

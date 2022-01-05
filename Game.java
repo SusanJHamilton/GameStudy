@@ -135,6 +135,7 @@ public class Game {
     Scanner input = new Scanner(System.in);
     String action =  input.nextLine();
     System.out.println(doTurn(action));
+    input.close();
   }
   public String doTurn(String action) 
   {
