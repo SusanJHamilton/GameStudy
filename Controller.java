@@ -42,13 +42,27 @@ public class Controller
   
    // This is the default action - pick available action at random
    // Because this does not require knowledge of state values it can be a default method for the controller
-   public String pickAction(String strategy){
+   public String pickAction(String strategy)
+   {
      if (strategy.equals("random"))
      {
        return pickRandomAction();
      }
      if (strategy.equals("best")){
        return pickBestAction();
+     }
+     //Half of the time, the "exploratory" strategy will play a move picking the best action, and the other half it will pick a random one
+     if(strategy.equals("exploratory")) 
+     {
+      Random random = new Random();
+       if(random.nextDouble() >= 0.25)
+       {
+         return pickBestAction();
+       }
+       else
+       {
+         return pickRandomAction();
+       }
      }
      return "not supported";
    }
@@ -84,7 +98,11 @@ public void registerValues(HashMap<String,HashMap<String, Double>> stateActionVa
 // Pick the best action using known action values for this given state 
   public String pickBestAction(){
     String state=getState();
-      HashMap<String, Double> actions=stateActionValues.get(state);
+      HashMap<String, Double> actions = null;
+      if(stateActionValues != null)
+      {
+        actions = stateActionValues.get(state);
+      }
       double maxVal = 0.0;
       String maxAct="";
       if(actions!=null){
@@ -128,13 +146,17 @@ public void registerValues(HashMap<String,HashMap<String, Double>> stateActionVa
     game.doTurn(action);
     moveNum++;
   }
-  
    public double playGame(String strategy){
     moveNum = 0;
-    game=new Game();
+    game = new Game();
     while(game.player.getHealth() > 0)
     {
       doMove(strategy);
+      if(moveNum >= 10000)
+      {
+          System.out.println("Ending game because the player lived 10,000 moves");
+          break;
+      }
     }
     if(printDetails){System.out.println("The player lived "+ moveNum+ " number of turns");}
     return moveNum;

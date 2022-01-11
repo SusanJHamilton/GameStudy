@@ -13,7 +13,7 @@ public class ReinforcementModel {
   /* <State, < Action, Value > >*/
   public HashMap<String,HashMap<String, Double>> stateActionValues = new HashMap<String,HashMap<String, Double>>();
   public HashMap<String,Double> stateValues = new HashMap<String,Double>();
-  public String strategy="random";
+  public String strategy="random"; //Default Value
   double lamda = 0.1;
   /* debugging helplers */
    void  dumpSizes()
@@ -66,7 +66,7 @@ public class ReinforcementModel {
     {
       return 0.0;  // state is worth zero if player is dead
     }
-    String action = ctrl.pickAction("random");
+    String action = ctrl.pickAction(strategy);
     // he lives one day then performs action so add 1
     double actionVal = 1+evaluateAction(action, ctrl);
     Double existingActionVal = stateActionValues.get(state).get(action);
@@ -123,27 +123,30 @@ public class ReinforcementModel {
   }
   public void sweep(int nTests) 
   {
+    strategy = "exploratory";
     PrintWriter out = null;
-    try{
+    try
+    {
       out=new PrintWriter(new BufferedWriter(new FileWriter("ReinforcementResults.csv")));
-    }catch(Exception e){
+    }catch(Exception e)
+    {
       e.printStackTrace();
     } 
     out.println("NRuns,Lifetime");
-    for(int nRuns=0; nRuns<2; nRuns++)
+    for(int nRuns=0; nRuns<4; nRuns++)
     {
       stateActionValues = new HashMap<String,HashMap<String, Double>>();
       stateValues = new HashMap<String,Double>();
     int totalGames=1;
     // iterating once first so that the total games ends up a nice power of 2
     iterate(false);
-    for(int nGames = 1; nGames <= 1000000; nGames = nGames*2)
+    for(double nGames = 1; nGames <= 14000; nGames = nGames*1.2)
     { double totalmoves=0.0;
       for(int i=0;i<nGames;i++)
       {
         totalmoves+=iterate(false);
       }
-      totalGames+=nGames;
+      totalGames += nGames;
       double avgmoves=totalmoves/nGames;  
       out.println(totalGames + "," +average(nTests));    
       System.out.println("Games Played = " + totalGames + " Average = " +average(nTests)+" Average state value "+averageStateValues()+" Random move average = "+avgmoves);
@@ -170,7 +173,7 @@ public class ReinforcementModel {
   {
     ReinforcementModel x = new ReinforcementModel();
 //x.test();
-    x.sweep(1000);
+    x.sweep(100);
   }
   public void test(){ 
       Scanner input = new Scanner(System.in);
