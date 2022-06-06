@@ -9,7 +9,7 @@ This is a study of machine learning algorithms, specifically reinforcement learn
 
 In this study in particular, we’re interested in an application of machine learning in game theory, in order to utilize the methodology of learning within a simple game in order to investigate aspects of the theory and associated algorithms in a concrete example. 
 
-We discovered that our agent was able to effectively learn to perform better in the game. We also investigated the convergence of the agent’s learning progress. As well as gradual learning, we found some instances where the agent discovered methods for surviving indefinitely within the game i.e., in addition to gradual learning, the algorithms also led to a process of discrete discovery of winning strategies. 
+We discovered that our agent was able to effectively learn to perform better in the game. We also investigated the convergence of the agent’s learning progress. As well as gradual learning, we found some instances where the agent disovered methods for surviving indefinitely within the game i.e., in addition to gradual learning, the algorithms also led to a process of discrete discovery of winning strategies. 
 
 ## Game Description
 
